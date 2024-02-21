@@ -5,6 +5,8 @@
             <span class="mini-icon">-</span>
         </a>
     </li>
+
+    <!-- dashboard -->
     <li class="nav-item">
         <a class="nav-link {{activeRoute(route('dashboard'))}}" aria-current="page" href="{{route('dashboard')}}">
             <i class="icon">
@@ -16,6 +18,8 @@
             <span class="item-name">Dashboard</span>
         </a>
     </li>
+
+    <!-- Menu style -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button" aria-expanded="false" aria-controls="horizontal-menu">
             <i class="icon">
@@ -101,6 +105,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- Design System -->
     <li class="nav-item">
         <a class="nav-link" aria-current="page" href="{{route('uisheet')}}" target="_blank">
             <i class="icon">
@@ -113,13 +119,18 @@
             <span class="item-name">Design System<span class="badge rounded-pill bg-success item-name">UI</span></span>
         </a>
     </li>
+
+
     <li><hr class="hr-horizontal"></li>
+
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Pages</span>
             <span class="mini-icon">-</span>
         </a>
     </li>
+
+    <!-- special page -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-special-pages" role="button"  aria-expanded="false" aria-controls="sidebar-special-pages">
             <i class="icon">
@@ -217,6 +228,7 @@
         </ul>
     </li>
 
+    <!-- authentication -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-auth" role="button" aria-expanded="false" aria-controls="sidebar-user">
             <i class="icon">
@@ -300,6 +312,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- users -->
     <li class="nav-item">
         <a class="nav-link " data-bs-toggle="collapse" href="#sidebar-user" role="button" aria-expanded="false" aria-controls="sidebar-user">
             <i class="icon">
@@ -361,6 +375,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- utilities -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#utilities-error" role="button" aria-expanded="false" aria-controls="utilities-error">
             <i class="icon">
@@ -415,6 +431,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- admin -->
     <li class="nav-item">
         <a class="nav-link {{activeRoute(route('role.permission.list'))}}" href="{{route('role.permission.list')}}" target="_blank">
             <i class="icon">
@@ -423,9 +441,10 @@
             <path opacity="0.4" d="M17.523 7.39595V8.86667C17.1673 8.7673 16.7913 8.71761 16.4052 8.71761H15.7447V7.39595C15.7447 5.37868 14.0681 3.73903 12.0053 3.73903C9.94257 3.73903 8.26594 5.36874 8.25578 7.37608V8.71761H7.60545C7.20916 8.71761 6.83319 8.7673 6.47754 8.87661V7.39595C6.4877 4.41476 8.95692 2 11.985 2C15.0537 2 17.523 4.41476 17.523 7.39595Z" fill="currentColor"></path>
             </svg>
             </i>
-            <span class="item-name">Admin</span>
+            <span class="item-name">Tests</span>
         </a>
     </li>
+
     <li><hr class="hr-horizontal"></li>
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
@@ -433,6 +452,8 @@
             <span class="mini-icon">-</span>
         </a>
     </li>
+
+    <!-- components -->
     <li class="nav-item">
         <a class="nav-link" href="{{route('uisheet')}}" target="_blank">
             <i class="icon">
@@ -443,6 +464,8 @@
             <span class="item-name">Components</span>
         </a>
     </li>
+
+    <!-- widget -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-widget" role="button" aria-expanded="false" aria-controls="sidebar-widget">
             <i class="icon">
@@ -500,6 +523,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- maps -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-maps" role="button" aria-expanded="false" aria-controls="sidebar-maps">
             <i class="icon">
@@ -544,6 +569,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- form -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-form" role="button" aria-expanded="false" aria-controls="sidebar-form">
             <i class="icon">
@@ -601,6 +628,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- table -->
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-table" role="button" aria-expanded="false" aria-controls="sidebar-table">
             <i class="icon">
@@ -646,6 +675,8 @@
             </li>
         </ul>
     </li>
+
+    <!-- icons -->
     <li class="nav-item mb-5">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-icons" role="button" aria-expanded="false" aria-controls="sidebar-icons">
             <i class="icon">

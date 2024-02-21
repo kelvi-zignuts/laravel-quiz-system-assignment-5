@@ -6,7 +6,9 @@ use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Artisan;
+
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -138,3 +140,10 @@ Route::group(['prefix' => 'icons'], function() {
 //Extra Page Routs
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
+
+
+
+
+Route::get('/create',[TestController::class,'create'])->name('create');
+Route::post('/tests',[TestController::class,'store'])->name('store');
+Route::get('/index',[TestController::class,'index'])->name('index');
