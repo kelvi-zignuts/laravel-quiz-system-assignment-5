@@ -445,16 +445,16 @@
         </a>
     </li>
 
-    <li><hr class="hr-horizontal"></li>
-    <li class="nav-item static-item">
+    <!-- <li><hr class="hr-horizontal"></li> -->
+    <!-- <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Elements</span>
             <span class="mini-icon">-</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- components -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="{{route('uisheet')}}" target="_blank">
             <i class="icon">
                  <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -463,10 +463,10 @@
             </i>
             <span class="item-name">Components</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- widget -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-widget" role="button" aria-expanded="false" aria-controls="sidebar-widget">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -522,10 +522,10 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> -->
 
     <!-- maps -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-maps" role="button" aria-expanded="false" aria-controls="sidebar-maps">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -568,10 +568,10 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> -->
 
     <!-- form -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-form" role="button" aria-expanded="false" aria-controls="sidebar-form">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -627,10 +627,10 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> -->
 
     <!-- table -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-table" role="button" aria-expanded="false" aria-controls="sidebar-table">
             <i class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" fill="none">
@@ -674,10 +674,10 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> -->
 
     <!-- icons -->
-    <li class="nav-item mb-5">
+    <!-- <li class="nav-item mb-5">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-icons" role="button" aria-expanded="false" aria-controls="sidebar-icons">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -733,5 +733,5 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> -->
 </ul>

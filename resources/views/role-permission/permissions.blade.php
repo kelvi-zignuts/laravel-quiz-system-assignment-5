@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Temlate</title>
+</head>
+<body>
 <x-app-layout :assets="$assets ?? []">
 <div>
    <div class="row">
@@ -28,15 +38,15 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table text-center">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Discription</th>
                                 <th>Level</th>
-                                <th class="text-center">Action</th>
-                                <th></th>
-                                <th></th>
+                                <th colspan="4" style="text-align:center;">Action</th>
+                                <!-- <th></th>
+                                <th></th> -->
                             </tr>
                         </thead>
                     
@@ -46,16 +56,39 @@
                             <td>{{$test->name}}</td>
                             <td>{{$test->description}}</td>
                             <td>{{$test->level}}</td>
-                            <td><button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit</button></td>
-                            <td><button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button></td>
-                            <td><button type="submit" class="btn btn-primary" data-bs-dismiss="modal">View</button></td>
+
+                            <td>
+                                <!-- <a href="/role-permission/{{$test->id}}/edit" class="btn btn-primary">Edit</a> -->
+                                    <!-- <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit</button> -->
+                            </td>
+
+                            <td class="text-center">
+                                <a href="/role-permission/{{$test->id}}/edit" style="margin-right:40px;">
+                                    <i class="fas fa-pencil-alt" style="font-size:20px;"></i>
+                                </a>
+                                <!-- <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a type="submit" class="btn btn-danger">
+                                        <i class="material-icons" style="font-size:20px;">delete</i>
+                                    </a>
+                                </form> -->
+                            
+                                <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('are you sure you want to delete this test?')">delete</button>
+                                </form>
+                                <a href="{{route('tests.show',['id'=>$test->id])}}" style="margin-right:40px;">
+                                    <i class="material-icons" style="font-size:20px;">visibility</i>
+                                </a>
+                            </td>
+                            <!-- <td><button type="submit" class="btn btn-primary" data-bs-dismiss="modal">View</button></td> -->
                         </tr>
                         @endforeach
                     </tbody>
                     </table>
                 </div>
-
-               
             </div>
              <!-- <div class="card-body">
                 <div class="table-responsive">
@@ -103,6 +136,9 @@
    </div>
 </div>
 </x-app-layout>
+</body>
+</html>
+
 
 
 

@@ -10,7 +10,7 @@ class TestController extends Controller
     public function index()
     {
         $tests = Test::all();
-        return view('role-permission.permissions', ['tests'=>$tests]);
+        return view('test.permissions', ['tests'=>$tests]);
     }
     public function create(){
         return view('role-permission.form-role');
@@ -38,11 +38,32 @@ class TestController extends Controller
         // $test->save();
 
         // return redirect()->back()->with('success','Test created successfully');
-        return redirect()->route('dashboard')->with('success','Test created successfully');
+        return redirect()->route('role.permission.list')->with('success','Test created successfully');
     }
-    // public function show()
-    // {
-    //     $test = 
-    // }
+    public function edit($id){
+        $test = Test::findOrFail($id);
+
+        return view('role-permission.edit-test',compact('test'));
+    }
+    public function update(Request $request,$id){
+        $test = Test::findOrFail($id);
+        $test->update($request->all());
+
+        return redirect()->route('role.permission.list')->with('success','Test Updated successfully');
+
+    }
+    public function destroy($id)
+    {
+        $test = Test::findOrFail($id);
+        $test->delete();
+
+        return redirect()->route('role.permission.list')->with('success','Test Deleted Successfully');
+    }
+    public function show($id)
+    {
+        $test = Test::findOrFail($id);
+        return view('role-permission.test-details',compact('test'));
+    }
+
 
 }

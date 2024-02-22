@@ -7,6 +7,7 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Artisan;
 
 // Packages
@@ -62,6 +63,20 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
+
+    //Delete button in Tests
+    Route::delete('/role-permission/{id}',[TestController::class,'destroy'])->name('tests.destroy');
+
+    //Edit & Update button in Tests
+    Route::get('/role-permission/{id}/edit',[TestController::class,'edit'])->name('tests.edit');
+    Route::put('/role-permission/{id}/',[TestController::class,'update'])->name('tests.update');
+
+    Route::get('/role-permission/tests/{id}',[TestController::class,'show'])->name('tests.show');
+
+    //for questions
+    Route::get('role-permission/questions/{id}',[QuestionController::class,'index'])->name('questions.index');
+    Route::get('questions/create/{id}',[QuestionController::class,'create'])->name('questions.create');
+    Route::post('questions',[QuestionController::class,'store'])->name('questions.store');
 });
 
 //App Details Page => 'Dashboard'], function() {
@@ -141,9 +156,8 @@ Route::group(['prefix' => 'icons'], function() {
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
 
-
-
-
+    
+//for testscontroller
 Route::get('/create',[TestController::class,'create'])->name('create');
 Route::post('/tests',[TestController::class,'store'])->name('store');
 Route::get('/index',[TestController::class,'index'])->name('index');
