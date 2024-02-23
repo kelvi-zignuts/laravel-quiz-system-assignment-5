@@ -8,7 +8,7 @@
                                 <h4 class="card-title mb-0">Edit Test</h4>
                             </div>
                             <div class="card-body">
-                                    <form action="/role-permission/{{$test->id}}" method='POST'>
+                                    <form action="/test-module/{{$test->id}}" method='POST'>
                                         @csrf
                                         @method('PUT')
 

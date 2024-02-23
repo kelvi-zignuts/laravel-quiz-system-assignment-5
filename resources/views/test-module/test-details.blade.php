@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 <div class="card">
                 <div class="mt-3">
-                            <a href="javascript:history.back()" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
+                            <a href="/test-module" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
                         </div>
                     <div class="card-header">
                     
@@ -25,7 +25,7 @@
                         <p><strong>Description:</strong> {{ $test->description }}</p>
                         <p><strong>Level:</strong> {{ $test->level }}</p>
                         <div class="mt-3  text-center">
-                            <a href="{{route('questions.index',['id'=>$test->id])}}" class="btn btn-primary">View Questions</a>
+                            <a href="{{route('test-module.questions.index',['id'=>$test->id])}}" class="btn btn-primary">View Questions</a>
                         </div>
                     </div>
                 </div>

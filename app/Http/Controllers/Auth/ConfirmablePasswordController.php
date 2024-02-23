@@ -38,6 +38,13 @@ class ConfirmablePasswordController extends Controller
             ]);
         }
 
+        // if($request->email=='admin@example.com'){
+        //     return $this->guard()->attempt(
+        //         $this->credentials($request),$request->filled('remember')
+        //     );
+        // }
+        // return false;
+
         $request->session()->put('auth.password_confirmed_at', time());
 
         return redirect()->intended(RouteServiceProvider::HOME);

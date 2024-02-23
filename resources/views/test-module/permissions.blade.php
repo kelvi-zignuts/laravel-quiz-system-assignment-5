@@ -58,27 +58,34 @@
                             <td>{{$test->level}}</td>
 
                             <td>
-                                <!-- <a href="/role-permission/{{$test->id}}/edit" class="btn btn-primary">Edit</a> -->
+                                <!-- <a href="/test-module/{{$test->id}}/edit" class="btn btn-primary">Edit</a> -->
                                     <!-- <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit</button> -->
                             </td>
 
                             <td class="text-center">
-                                <a href="/role-permission/{{$test->id}}/edit" style="margin-right:40px;">
+                                <a href="/test-module/{{$test->id}}/edit" style="margin-right:40px;">
                                     <i class="fas fa-pencil-alt" style="font-size:20px;"></i>
                                 </a>
                                 <!-- <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px;">
                                     @csrf
                                     @method('DELETE')
-                                    <a type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn ">
                                         <i class="material-icons" style="font-size:20px;">delete</i>
-                                    </a>
+                                    </button>
                                 </form> -->
+                                <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px; ">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn" style="color:red;" onclick="return confirm('are you sure you want to delete this test?')">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
                             
-                                <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px;">
+                                <!-- <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('are you sure you want to delete this test?')">delete</button>
-                                </form>
+                                </form> -->
                                 <a href="{{route('tests.show',['id'=>$test->id])}}" style="margin-right:40px;">
                                     <i class="material-icons" style="font-size:20px;">visibility</i>
                                 </a>

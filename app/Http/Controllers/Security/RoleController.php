@@ -26,7 +26,7 @@ class RoleController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        $view = view('role-permission.form-role')->render();
+        $view = view('test-module.create-test')->render();
         return response()->json(['data' =>  $view, 'status'=> true]);
     }
 

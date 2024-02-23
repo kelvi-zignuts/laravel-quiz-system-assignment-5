@@ -13,7 +13,7 @@ class TestController extends Controller
         return view('test.permissions', ['tests'=>$tests]);
     }
     public function create(){
-        return view('role-permission.form-role');
+        return view('test-module.create-test');
     }
     public function store(Request $request)
     {
@@ -43,7 +43,7 @@ class TestController extends Controller
     public function edit($id){
         $test = Test::findOrFail($id);
 
-        return view('role-permission.edit-test',compact('test'));
+        return view('test-module.edit-test',compact('test'));
     }
     public function update(Request $request,$id){
         $test = Test::findOrFail($id);
@@ -62,7 +62,7 @@ class TestController extends Controller
     public function show($id)
     {
         $test = Test::findOrFail($id);
-        return view('role-permission.test-details',compact('test'));
+        return view('test-module.test-details',compact('test'));
     }
 
 

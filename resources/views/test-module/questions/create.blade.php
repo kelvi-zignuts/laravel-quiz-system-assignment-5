@@ -13,8 +13,8 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
-                <div class="mt-3">
-                            <a href="javascript:history.back()" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
+                        <div class="mt-3">
+                            <a href="{{route('test-module.questions.index',['id'=>$test_id])}}" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
                         </div>
                     <div class="card-header text-center">Create Question</div>
                     <div class="card-body">

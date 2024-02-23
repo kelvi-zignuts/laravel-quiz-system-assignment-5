@@ -54,7 +54,7 @@ Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
-    Route::get('/role-permission',[RolePermission::class, 'index'])->name('role.permission.list');
+    Route::get('/test-module',[RolePermission::class, 'index'])->name('role.permission.list');
     Route::resource('permission',PermissionController::class);
     Route::resource('role', RoleController::class);
 
@@ -63,20 +63,38 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
+    // Route::get('/create',[TestController::class,'create'])->name('create');
+    // Route::post('/tests',[TestController::class,'store'])->name('store');
+    // Route::get('/index',[TestController::class,'index'])->name('index');
+
+    Route::prefix('test-module')->group(function(){
+      
+        Route::delete('/{id}',[TestController::class,'destroy'])->name('tests.destroy');
+        Route::get('/{id}/edit',[TestController::class,'edit'])->name('tests.edit');
+        Route::put('/{id}',[TestController::class,'update'])->name('tests.update');
+        Route::get('/tests/{id}',[TestController::class,'show'])->name('tests.show');
+
+        Route::get('/questions/{id}',[QuestionController::class,'index'])->name('test-module.questions.index');
+        Route::get('/questions/create/{id}',[QuestionController::class,'create'])->name('questions.create');
+        Route::post('/questions',[QuestionController::class,'store'])->name('questions.store');
+        Route::get('/questions/{id}/edit',[QuestionController::class,'edit'])->name('test-module.questions.edit');
+        Route::put('/questions/{id}',[QuestionController::class,'update'])->name('test-module.questions.update');
+        Route::delete('/questions/{id}',[QuestionController::class,'destroy'])->name('test-module.questions.destroy');
+    });
 
     //Delete button in Tests
-    Route::delete('/role-permission/{id}',[TestController::class,'destroy'])->name('tests.destroy');
+    // Route::delete('/test-module/{id}',[TestController::class,'destroy'])->name('tests.destroy');
 
-    //Edit & Update button in Tests
-    Route::get('/role-permission/{id}/edit',[TestController::class,'edit'])->name('tests.edit');
-    Route::put('/role-permission/{id}/',[TestController::class,'update'])->name('tests.update');
+    // //Edit & Update button in Tests
+    // Route::get('/test-module/{id}/edit',[TestController::class,'edit'])->name('tests.edit');
+    // Route::put('/test-module/{id}/',[TestController::class,'update'])->name('tests.update');
 
-    Route::get('/role-permission/tests/{id}',[TestController::class,'show'])->name('tests.show');
+    // Route::get('/test-module/tests/{id}',[TestController::class,'show'])->name('tests.show');
 
-    //for questions
-    Route::get('role-permission/questions/{id}',[QuestionController::class,'index'])->name('questions.index');
-    Route::get('questions/create/{id}',[QuestionController::class,'create'])->name('questions.create');
-    Route::post('questions',[QuestionController::class,'store'])->name('questions.store');
+    // //for questions
+    // Route::get('test-module/questions/{id}',[QuestionController::class,'index'])->name('questions.index');
+    // Route::get('questions/create/{id}',[QuestionController::class,'create'])->name('questions.create');
+    // Route::post('questions',[QuestionController::class,'store'])->name('questions.store');
 });
 
 //App Details Page => 'Dashboard'], function() {
@@ -158,6 +176,6 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 
     
 //for testscontroller
-Route::get('/create',[TestController::class,'create'])->name('create');
-Route::post('/tests',[TestController::class,'store'])->name('store');
-Route::get('/index',[TestController::class,'index'])->name('index');
+// Route::get('/create',[TestController::class,'create'])->name('create');
+// Route::post('/tests',[TestController::class,'store'])->name('store');
+// Route::get('/index',[TestController::class,'index'])->name('index');

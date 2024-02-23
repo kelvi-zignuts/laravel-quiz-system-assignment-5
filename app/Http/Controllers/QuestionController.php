@@ -10,16 +10,16 @@ class QuestionController extends Controller
 {
     public function index($id)
     {
-        $questions = Question::all();
-        // $questions = Question::where('test_id',$testId)->get();
-
-        return view('role-permission.questions.index',['questions'=>$questions, 'test_id' => $id]);
+        // $questions = Question::all();
+        $questions = Question::where('test_id',$id)->get();
+        // $questions = Question::with('options')->get();
+        return view('test-module.questions.index',['questions'=>$questions, 'test_id' => $id]);
     }
     public function create($id)
     {
         // $test = Test::all();
 
-        return view('role-permission.questions.create',['test_id' => $id]);
+        return view('test-module.questions.create',['test_id' => $id]);
     }
     public function store(Request $request)
     {
@@ -37,6 +37,23 @@ class QuestionController extends Controller
         Question::create($request->all());
         
             // return redirect()->bak()->with('success','question created successfully');
-        return redirect()->route('questions.index',['id'=>$request->test_id])->with('success','question created successfully.');
+        return redirect()->route('test-module.questions.index',['id'=>$request->test_id])->with('success','question created successfully.');
+    }
+    public function edit($id){
+        $question = Question::findOrFail($id);
+        $test_id = $question->test_id;
+        return view('test-module.questions.edit-question',compact('question','test_id'));
+    }
+    public function update(Request $request, $id){
+        $question = Question::findOrFail($id);
+        $test_id = $question->test_id;
+        $question->update($request->all());
+        return redirect()->route('test-module.questions.index',['id'=>$test_id])->with('success','question update successfully');
+    }
+    public function destroy($id){
+        $question = Question::findOrFail($id);
+        $test_id = $question->test_id;
+        $question->delete();
+        return redirect()->route('test-module.questions.index',['id'=>$test_id])->with('success','question deleted successfully');
     }
 }

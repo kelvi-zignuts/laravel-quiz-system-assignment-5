@@ -26,7 +26,7 @@ class PermissionController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        $view = view('role-permission.form-permission')->render();
+        $view = view('test-module.form-permission')->render();
         return response()->json(['data' =>  $view, 'status'=> true]);
     }
 
