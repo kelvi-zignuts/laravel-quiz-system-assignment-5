@@ -17,12 +17,12 @@ class UserTableSeeder extends Seeder
     {
         $users = [
             [
-                'first_name' => 'System',
-                'last_name' => 'Admin',
-                'username' => 'systemadmin',
-                'email' => 'admin@example.com',
+                'first_name' => 'Test1',
+                'last_name' => 'Test1admin',
+                'username' => 'admintest1admin',
+                'email' => 'admintest1@example.com',
                 'password' => bcrypt('password'),
-                'phone_number' => '+12398190255',
+                'phone_number' => '+12398190265',
                 'email_verified_at' => now(),
                 'user_type' => 'admin',
                 'status' => 'active',

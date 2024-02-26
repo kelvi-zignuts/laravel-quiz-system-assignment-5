@@ -8,6 +8,8 @@ use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\userTestController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Artisan;
 
 // Packages
@@ -63,9 +65,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
-    // Route::get('/create',[TestController::class,'create'])->name('create');
-    // Route::post('/tests',[TestController::class,'store'])->name('store');
-    // Route::get('/index',[TestController::class,'index'])->name('index');
 
     Route::prefix('test-module')->group(function(){
       
@@ -82,19 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/questions/{id}',[QuestionController::class,'destroy'])->name('test-module.questions.destroy');
     });
 
-    //Delete button in Tests
-    // Route::delete('/test-module/{id}',[TestController::class,'destroy'])->name('tests.destroy');
+Route::get('/user-tests',[userTestController::class,'index'])->name('user.tests.index');
+Route::get('/user-tests/{id}',[userTestController::class,'startExam'])->name('user.tests.startExam');
 
-    // //Edit & Update button in Tests
-    // Route::get('/test-module/{id}/edit',[TestController::class,'edit'])->name('tests.edit');
-    // Route::put('/test-module/{id}/',[TestController::class,'update'])->name('tests.update');
-
-    // Route::get('/test-module/tests/{id}',[TestController::class,'show'])->name('tests.show');
-
-    // //for questions
-    // Route::get('test-module/questions/{id}',[QuestionController::class,'index'])->name('questions.index');
-    // Route::get('questions/create/{id}',[QuestionController::class,'create'])->name('questions.create');
-    // Route::post('questions',[QuestionController::class,'store'])->name('questions.store');
 });
 
 //App Details Page => 'Dashboard'], function() {
@@ -179,3 +168,5 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 // Route::get('/create',[TestController::class,'create'])->name('create');
 // Route::post('/tests',[TestController::class,'store'])->name('store');
 // Route::get('/index',[TestController::class,'index'])->name('index');
+
+// Route::post('/login',[LoginController::class,'attemptLogin'])->name('login');

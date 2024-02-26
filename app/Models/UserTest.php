@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Test extends Model
+class UserTest extends Model
 {
     use HasFactory;
-    protected $table = 'tests';
-    protected $fillable = ["name","description","level"];
+    protected $fillable = ['name', 'description','level'];
 
-    public function questions(){
+    public function questions()
+    {
         return $this->hasMany(Question::class);
     }
 }

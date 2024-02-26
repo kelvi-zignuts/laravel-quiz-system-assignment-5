@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'banned',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**

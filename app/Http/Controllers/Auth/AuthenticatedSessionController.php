@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use App\Models\Test;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,11 +30,34 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        // $request->authenticate();
+        
+        // $data =  $request->session()->regenerate();
 
-        $request->session()->regenerate();
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+            'remember_me' => 'boolean'
+            ]);
+            $credentials = request(['email','password']);
+            if(!Auth::attempt($credentials))
+            {
+                return response()->json([
+                    'message' => 'Unauthorized'
+                ],401);
+            }
 
-        return redirect(RouteServiceProvider::HOME);
+            $user = $request->user();
+
+            if($user->user_type==='admin'){
+                return redirect(RouteServiceProvider::HOME);
+            }
+            $tests = Test::all();
+            return redirect()->route('user.tests.index',['tests'=>$tests]);
+            // return view('user-module.index');
+
+
+        // return redirect(RouteServiceProvider::HOME);
     }
 
     /**
