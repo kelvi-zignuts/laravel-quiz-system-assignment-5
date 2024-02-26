@@ -9,10 +9,32 @@ class HomeController extends Controller
     /*
      * Dashboard Pages Routs
      */
-    public function index(Request $request)
+    public function index()
     {
-        $assets = ['chart', 'animation'];
-        return view('dashboards.dashboard', compact('assets'));
+        dd('index');
+        if(auth()->user()->user_type == 'admin')
+        {
+            return redirect('login');
+        }
+        else
+        {
+            return redirect('user.quiz.index');
+        }
+        // $assets = ['chart', 'animation'];
+        // return view('dashboards.dashboard', compact('assets'));
+    }
+
+    public function dashboard()
+    {
+        if(auth()->user()->user_type == 'admin')
+        {
+            $assets = ['chart', 'animation'];
+            return view('dashboards.dashboard', compact('assets'));
+        }
+        else
+        {
+            return redirect()->route('user.quiz.index');
+        }
     }
 
     /*
@@ -159,6 +181,7 @@ class HomeController extends Controller
      */
     public function uisheet(Request $request)
     {
+        dd('uisheet');
         return view('uisheet');
     }
 

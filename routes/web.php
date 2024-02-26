@@ -10,6 +10,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\userTestController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\User\QuizController;
 use Illuminate\Support\Facades\Artisan;
 
 // Packages
@@ -59,32 +60,39 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/test-module',[RolePermission::class, 'index'])->name('role.permission.list');
     Route::resource('permission',PermissionController::class);
     Route::resource('role', RoleController::class);
-
-    // Dashboard Routes
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
-    // Users Module
     Route::resource('users', UserController::class);
 
-    Route::prefix('test-module')->group(function(){
-      
-        Route::delete('/{id}',[TestController::class,'destroy'])->name('tests.destroy');
-        Route::get('/{id}/edit',[TestController::class,'edit'])->name('tests.edit');
-        Route::put('/{id}',[TestController::class,'update'])->name('tests.update');
-        Route::get('/tests/{id}',[TestController::class,'show'])->name('tests.show');
+    // ours
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-        Route::get('/questions/{id}',[QuestionController::class,'index'])->name('test-module.questions.index');
-        Route::get('/questions/create/{id}',[QuestionController::class,'create'])->name('questions.create');
-        Route::post('/questions',[QuestionController::class,'store'])->name('questions.store');
-        Route::get('/questions/{id}/edit',[QuestionController::class,'edit'])->name('test-module.questions.edit');
-        Route::put('/questions/{id}',[QuestionController::class,'update'])->name('test-module.questions.update');
-        Route::delete('/questions/{id}',[QuestionController::class,'destroy'])->name('test-module.questions.destroy');
+
+    Route::prefix('admin')->group(function () {
+        Route::prefix('test')->group(function () {
+            Route::get('/', [TestController::class, 'index'])->name('admin.test.index');
+            Route::get('/create', [TestController::class, 'create'])->name('admin.test.create');
+            Route::post('/store', [TestController::class, 'store'])->name('admin.test.store');
+            Route::get('/edit/{id}', [TestController::class, 'edit'])->name('admin.test.edit');
+            Route::post('/update/{id}', [TestController::class, 'update'])->name('admin.test.update');
+            Route::post('/destroy/{id}', [TestController::class, 'destroy'])->name('admin.test.destroy');
+            Route::prefix('question')->group(function () {
+                Route::get('/{id}', [QuestionController::class, 'index'])->name('admin.test.question.index');
+                Route::get('/create/{id}', [QuestionController::class, 'create'])->name('admin.test.question.create');
+                Route::POST('/store/{id}', [QuestionController::class, 'store'])->name('admin.test.question.store');
+                Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('admin.test.question.edit');
+                Route::post('/update/{id}', [QuestionController::class, 'update'])->name('admin.test.question.update');
+                Route::post('/destroy/{id}', [QuestionController::class, 'destroy'])->name('admin.test.question.destroy');
+            });
+        });
     });
 
-Route::get('/user-tests',[userTestController::class,'index'])->name('user.tests.index');
-Route::get('/user-tests/{id}',[userTestController::class,'startExam'])->name('user.tests.startExam');
-
+    Route::prefix('user')->group(function () {
+        Route::get('quiz', [QuizController::class, 'index'])->name('user.quiz.index');
+        Route::get('quiz/start', [QuizController::class, 'quizStart'])->name('user.quiz.start');
+    });
+    Route::get('/user-tests', [userTestController::class, 'index'])->name('user.tests.index');
+    Route::get('/user-tests/{id}', [userTestController::class, 'startExam'])->name('user.tests.startExam');
 });
+
 
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function() {
@@ -163,7 +171,7 @@ Route::group(['prefix' => 'icons'], function() {
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
 
-    
+
 //for testscontroller
 // Route::get('/create',[TestController::class,'create'])->name('create');
 // Route::post('/tests',[TestController::class,'store'])->name('store');

@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         // $request->authenticate();
-        
+
         // $data =  $request->session()->regenerate();
 
         $request->validate([
@@ -49,13 +49,13 @@ class AuthenticatedSessionController extends Controller
 
             $user = $request->user();
 
-            if($user->user_type==='admin'){
+            if($user->user_type === 'admin'){
                 return redirect(RouteServiceProvider::HOME);
             }
-            $tests = Test::all();
-            return redirect()->route('user.tests.index',['tests'=>$tests]);
-            // return view('user-module.index');
-
+            else
+            {
+                return redirect()->route('user.quiz.index');
+            }
 
         // return redirect(RouteServiceProvider::HOME);
     }

@@ -9,61 +9,52 @@ class TestController extends Controller
 {
     public function index()
     {
-        $tests = Test::all();
-        return view('test.permissions', ['tests'=>$tests]);
+        $tests = Test::where('is_active', true)->get();
+        return view('admin.test.index', ['tests' => $tests]);
     }
-    public function create(){
-        return view('test-module.create-test');
+    public function create()
+    {
+        $view = view('admin.test.create')->render();
+        return response()->json(['data' =>  $view, 'status' => true]);
     }
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name'=> 'required',
-        //     'description' => 'required',
-        //     'level' => 'required',
-        // ]);
-        $ValidateData=$request->validate([
-            'name'=> 'required',
-            'description' => 'required',
-            'level' => 'required',
+        $request->validate([
+            'name'          => 'required',
+            'description'   => 'required',
+            'level'         => 'required',
+            'is_active'     => 'nullable',
         ]);
-    
-        $test  = Test::create($ValidateData);
-        // $test = Test::create($ValidateData);
 
-        // $test = new Test;
-        // $test->name= $request->name;
-        // $test->description = $request->description;
-        // $test->level = $request->level;
-        // $test->save();
-
-        // return redirect()->back()->with('success','Test created successfully');
-        return redirect()->route('role.permission.list')->with('success','Test created successfully');
+        Test::create($request->only('name', 'description', 'level') + ['is_active' => true]);
+        return redirect()->route('role.permission.list')->with('success', 'Test created successfully');
     }
-    public function edit($id){
+
+
+
+    public function edit($id)
+    {
         $test = Test::findOrFail($id);
 
-        return view('test-module.edit-test',compact('test'));
+        return view('admin.test.edit', compact('test'));
     }
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $test = Test::findOrFail($id);
-        $test->update($request->all());
+        $test->update($request->only('name', 'description', 'level') + ['is_active' => true]);
 
-        return redirect()->route('role.permission.list')->with('success','Test Updated successfully');
-
+        return redirect()->route('admin.test.index')->with('success', 'Test Updated successfully');
     }
     public function destroy($id)
     {
         $test = Test::findOrFail($id);
         $test->delete();
 
-        return redirect()->route('role.permission.list')->with('success','Test Deleted Successfully');
+        return redirect()->route('admin.test.index')->with('success', 'Test Deleted Successfully');
     }
     public function show($id)
     {
         $test = Test::findOrFail($id);
-        return view('test-module.test-details',compact('test'));
+        return view('test-module.test-details', compact('test'));
     }
-
-
 }

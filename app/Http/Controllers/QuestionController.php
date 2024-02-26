@@ -13,17 +13,18 @@ class QuestionController extends Controller
         // $questions = Question::all();
         $questions = Question::where('test_id',$id)->get();
         // $questions = Question::with('options')->get();
-        return view('test-module.questions.index',['questions'=>$questions, 'test_id' => $id]);
+        return view('admin.test.question.index',['questions'=>$questions, 'test_id' => $id]);
     }
     public function create($id)
     {
         // $test = Test::all();
 
-        return view('test-module.questions.create',['test_id' => $id]);
+        return view('admin.test.question.create',['test_id' => $id]);
     }
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-       
+        Test::findOrFail($id);
+
         $request->validate([
             'test_id'=>'required',
             'question'=>'required',
@@ -33,11 +34,11 @@ class QuestionController extends Controller
             'option_d'=>'required',
             'correct_option'=>'required|in:a,b,c,d',
         ]);
-       
+
         Question::create($request->all());
-        
+
             // return redirect()->bak()->with('success','question created successfully');
-        return redirect()->route('test-module.questions.index',['id'=>$request->test_id])->with('success','question created successfully.');
+        return redirect()->route('admin.test.question.index',['id'=>$id])->with('success','question created successfully.');
     }
     public function edit($id){
         $question = Question::findOrFail($id);
@@ -48,12 +49,12 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $test_id = $question->test_id;
         $question->update($request->all());
-        return redirect()->route('test-module.questions.index',['id'=>$test_id])->with('success','question update successfully');
+        return redirect()->route('admin.test.question.index',['id'=>$test_id])->with('success','question update successfully');
     }
     public function destroy($id){
         $question = Question::findOrFail($id);
         $test_id = $question->test_id;
         $question->delete();
-        return redirect()->route('test-module.questions.index',['id'=>$test_id])->with('success','question deleted successfully');
+        return redirect()->route('admin.test.question.index',['id'=>$test_id])->with('success','question deleted successfully');
     }
 }
