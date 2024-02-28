@@ -9,9 +9,15 @@ class HomeController extends Controller
     /*
      * Dashboard Pages Routs
      */
+    // public function index(Request $request)
+    // {
+    //     $assets = ['chart', 'animation'];
+    //     return view('dashboards.dashboard', compact('assets'));
+    // }
+
     public function index()
     {
-        dd('index');
+        // dd('index');
         if(auth()->user()->user_type == 'admin')
         {
             return redirect('login');
@@ -181,7 +187,7 @@ class HomeController extends Controller
      */
     public function uisheet(Request $request)
     {
-        dd('uisheet');
+        // dd('uisheet');
         return view('uisheet');
     }
 

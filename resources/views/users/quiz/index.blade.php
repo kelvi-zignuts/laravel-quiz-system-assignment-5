@@ -18,9 +18,18 @@
                             <option value="{{$test->id}}">{{$test->name}}</option>
                             @endforeach
                         </select>
-                        <!-- <a href="{{'select-exam'}}">start</a> -->
+                        
                         <button type="submit" >Start Exam</button>
+                           
                     </form>
+                    <form method="POST" action="{{route('logout')}}">
+                            @csrf
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                                {{ __('Log out') }}
+                            </a>
+                            </form>
                 </div>
     </div>
     </div>

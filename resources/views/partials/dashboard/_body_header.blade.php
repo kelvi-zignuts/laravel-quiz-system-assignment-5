@@ -225,7 +225,8 @@
             <li><a class="dropdown-item" href="{{route('users.show', auth()->id() || 1)}}">Profile</a></li>
             <li><a class="dropdown-item" href="{{route('auth.userprivacysetting')}}">Privacy Setting</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><form method="POST" action="{{route('logout')}}">
+            <li>
+              <form method="POST" action="{{route('logout')}}">
               @csrf
               <a href="javascript:void(0)" class="dropdown-item"
                 onclick="event.preventDefault();

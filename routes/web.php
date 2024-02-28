@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/edit/{id}', [TestController::class, 'edit'])->name('admin.test.edit');
             Route::post('/update/{id}', [TestController::class, 'update'])->name('admin.test.update');
             Route::post('/destroy/{id}', [TestController::class, 'destroy'])->name('admin.test.destroy');
+
             Route::prefix('question')->group(function () {
                 Route::get('/{id}', [QuestionController::class, 'index'])->name('admin.test.question.index');
                 Route::get('/create/{id}', [QuestionController::class, 'create'])->name('admin.test.question.create');
@@ -88,7 +89,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('user')->group(function () {
         Route::get('quiz', [QuizController::class, 'index'])->name('user.quiz.index');
         Route::get('quiz/start', [QuizController::class, 'quizStart'])->name('user.quiz.start');
+        Route::post('quiz/submit',[QuizController::class,'submit'])->name('user.quiz.submit');
+        Route::get('quiz/result/{testResultId}',[QuizController::class,'result'])->name('user.quiz.result');
     });
+
+
     Route::get('/user-tests', [userTestController::class, 'index'])->name('user.tests.index');
     Route::get('/user-tests/{id}', [userTestController::class, 'startExam'])->name('user.tests.startExam');
 });
