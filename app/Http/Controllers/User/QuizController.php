@@ -12,10 +12,18 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $tests = Test::where('is_active', true)->get();
-        return view('users.quiz.index', ['tests' => $tests]);
+        // $tests = Test::where('is_active', true)->get();
+        // return view('users.quiz.dashboard', ['tests' => $tests]);
+        try {
+            $tests = Test::where('is_active', true)->get();
+            return view('users.quiz.dashboard', ['tests' => $tests]);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching tests: ' . $e->getMessage());
+            return back()->with('error', 'Error fetching tests. Please try again later.');
+        }
     }
 
+   
     public function quizStart(Request $request)
     {
         // quiz start

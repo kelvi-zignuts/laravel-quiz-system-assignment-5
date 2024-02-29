@@ -93,6 +93,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('quiz/start', [QuizController::class, 'quizStart'])->name('user.quiz.start');
         Route::post('quiz/submit',[QuizController::class,'submit'])->name('user.quiz.submit');
         Route::get('quiz/result/{testResultId}',[QuizController::class,'result'])->name('user.quiz.result');
+        // Route::get('/users/quiz/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+        // Route::get('/users/quiz/dashboard',function(){
+        //     return view('users.quiz.dashboard');
+        // })->name('dashboard');
     });
 
 
