@@ -57,22 +57,12 @@
                             <td>{{$test->description}}</td>
                             <td>{{$test->level}}</td>
 
-                            <td>
-                                <!-- <a href="/test-module/{{$test->id}}/edit" class="btn btn-primary">Edit</a> -->
-                                    <!-- <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Edit</button> -->
-                            </td>
 
                             <td class="text-center">
                                 <a href="/test-module/{{$test->id}}/edit" style="margin-right:40px;">
                                     <i class="fas fa-pencil-alt" style="font-size:20px;"></i>
                                 </a>
-                                <!-- <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn ">
-                                        <i class="material-icons" style="font-size:20px;">delete</i>
-                                    </button>
-                                </form> -->
+                              
                                 <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px; ">
                                                 @csrf
                                                 @method('DELETE')
@@ -81,16 +71,10 @@
                                                 </button>
                                             </form>
                             
-                                <!-- <form action="{{route('tests.destroy',['id'=>$test->id])}}" method='POST' style="display:inline; margin-right:40px;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('are you sure you want to delete this test?')">delete</button>
-                                </form> -->
                                 <a href="{{route('tests.show',['id'=>$test->id])}}" style="margin-right:40px;">
                                     <i class="material-icons" style="font-size:20px;">visibility</i>
                                 </a>
                             </td>
-                            <!-- <td><button type="submit" class="btn btn-primary" data-bs-dismiss="modal">View</button></td> -->
                         </tr>
                         @endforeach
                     </tbody>

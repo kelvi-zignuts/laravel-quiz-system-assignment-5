@@ -43,8 +43,10 @@ class QuestionController extends Controller
     public function edit($id){
         $question = Question::findOrFail($id);
         $test_id = $question->test_id;
-        return view('test-module.questions.edit-question',compact('question','test_id'));
+        $questions = Question::where('test_id', $test_id)->get();
+        return view('admin.test.question.edit',compact('question','test_id'));
     }
+    
     public function update(Request $request, $id){
         $question = Question::findOrFail($id);
         $test_id = $question->test_id;

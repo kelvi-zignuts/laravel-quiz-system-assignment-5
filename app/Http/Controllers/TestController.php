@@ -10,7 +10,8 @@ class TestController extends Controller
     public function index()
     {
         $tests = Test::where('is_active', true)->get();
-        return view('admin.test.index', ['tests' => $tests]);
+        $testCount = Test::count();
+        return view('admin.test.index', ['tests' => $tests,'testCount'=>$testCount]);
     }
     public function create()
     {
@@ -27,7 +28,7 @@ class TestController extends Controller
         ]);
 
         Test::create($request->only('name', 'description', 'level') + ['is_active' => true]);
-        return redirect()->route('role.permission.list')->with('success', 'Test created successfully');
+        return redirect()->route('admin.test.index')->with('success', 'Test created successfully');
     }
 
 
@@ -55,6 +56,11 @@ class TestController extends Controller
     public function show($id)
     {
         $test = Test::findOrFail($id);
-        return view('test-module.test-details', compact('test'));
+        return view('admin.test.index', compact('test'));
+    }
+    public function getTestCount()
+    {
+        $testCount = Test::count();
+        return $testCount;
     }
 }

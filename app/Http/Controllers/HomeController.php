@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Test;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,9 @@ class HomeController extends Controller
         if(auth()->user()->user_type == 'admin')
         {
             return redirect('login');
+        //     $testCount = Test::count();
+        //     $assets = ['chart', 'animation'];
+        // return view('dashboards.dashboard', compact('assets','testCount'));
         }
         else
         {
@@ -34,8 +38,11 @@ class HomeController extends Controller
     {
         if(auth()->user()->user_type == 'admin')
         {
+            $testCount = Test::count();
             $assets = ['chart', 'animation'];
-            return view('dashboards.dashboard', compact('assets'));
+            return view('dashboards.dashboard', compact('assets','testCount'));
+            // $assets = ['chart', 'animation'];
+            // return view('dashboards.dashboard', compact('assets'));
         }
         else
         {

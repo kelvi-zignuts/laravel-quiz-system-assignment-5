@@ -13,8 +13,8 @@
                               </svg>
                            </div>
                            <div class="progress-detail">
-                              <p  class="mb-2">Total Sales</p>
-                              <h4 class="counter" style="visibility: visible;">$560K</h4>
+                              <p  class="mb-2">Total Test </p>
+                              <h4 class="counter" style="visibility: visible;">{{$testCount}}</h4>
                            </div>
                         </div>
                      </div>
@@ -49,7 +49,7 @@
                         </div>
                      </div>
                   </li>
-                  <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
+                  <!-- <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
                      <div class="card-body">
                         <div class="progress-widget">
                            <div id="circle-progress-04" class="circle-progress-01 circle-progress circle-progress-info text-center" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
@@ -63,8 +63,8 @@
                            </div>
                         </div>
                      </div>
-                  </li>
-                  <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1100">
+                  </li> -->
+                  <!-- <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1100">
                      <div class="card-body">
                         <div class="progress-widget">
                            <div id="circle-progress-05" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="50" data-type="percent">
@@ -78,8 +78,8 @@
                            </div>
                         </div>
                      </div>
-                  </li>
-                  <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
+                  </li> -->
+                  <!-- <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
                      <div class="card-body">
                         <div class="progress-widget">
                            <div id="circle-progress-06" class="circle-progress-01 circle-progress circle-progress-info text-center" data-min-value="0" data-max-value="100" data-value="40" data-type="percent">
@@ -93,8 +93,8 @@
                            </div>
                         </div>
                      </div>
-                  </li>
-                  <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1300">
+                  </li> -->
+                  <!-- <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1300">
                      <div class="card-body">
                         <div class="progress-widget">
                            <div id="circle-progress-07" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="30" data-type="percent">
@@ -108,7 +108,7 @@
                            </div>
                         </div>
                      </div>
-                  </li>
+                  </li> -->
                </ul>
                <div class="swiper-button swiper-button-next"></div>
                <div class="swiper-button swiper-button-prev"></div>

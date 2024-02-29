@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Temlate</title>
 </head>
-<body> -->
-@extends('layout.layout')
+<body>
+
 <x-app-layout :assets="$assets ?? []">
     <div class="container">
         <div class="row">
@@ -55,9 +55,9 @@
                                             <a href="{{route('admin.test.question.edit',['id'=>$question->id])}}" style="margin-left:30px;" >
                                                 <i class="fas fa-pencil-alt" style="font-size:20px;"></i>
                                             </a>
-                                            <form action="{{route('test-module.questions.destroy',['id'=>$question->id])}}" method='POST' style="display:inline; margin-left:60px; ">
+                                            <form action="{{route('admin.test.question.destroy',['id'=>$question->id])}}" method='POST' style="display:inline; margin-left:60px; ">
                                                 @csrf
-                                                @method('DELETE')
+                                                <!-- @method('DELETE') -->
                                                 <button type="submit" class="btn" style="color:red;" onclick="return confirm('are you sure you want to delete this test?')">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
@@ -76,5 +76,5 @@
         </div>
     </div>
 </x-app-layout>
-<!-- </body>
-</html> -->
+</body>
+</html>

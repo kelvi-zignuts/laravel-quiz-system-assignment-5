@@ -75,6 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/update/{id}', [TestController::class, 'update'])->name('admin.test.update');
             Route::post('/destroy/{id}', [TestController::class, 'destroy'])->name('admin.test.destroy');
 
+            Route::get('/count',[TestController::class,'getTestCount'])->name('admin.test.count');
+
             Route::prefix('question')->group(function () {
                 Route::get('/{id}', [QuestionController::class, 'index'])->name('admin.test.question.index');
                 Route::get('/create/{id}', [QuestionController::class, 'create'])->name('admin.test.question.create');

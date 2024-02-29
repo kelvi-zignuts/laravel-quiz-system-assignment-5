@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <h1>Exam Result</h1>
+    <h1>Exam Result for {{$testName}}</h1>
     <table>
         <tr>
             <th>Total Questions</th>

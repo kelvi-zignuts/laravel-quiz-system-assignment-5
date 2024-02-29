@@ -27,8 +27,9 @@ class QuizController extends Controller
         // redirect back to user with their scoring
         try{
             $testId = $request->input('test');
+            $test = Test::findOrFail($testId);
         $questions = Question::where('test_id',$testId)->get();
-        return view ('users.quiz.start',['questions'=>$questions,'testId'=>$testId]);
+        return view ('users.quiz.start',['questions'=>$questions,'test'=>$test]);
         }
         catch(\Exception $e){
             \Log::error('Error fetching question: '.$e->getMessage());
@@ -39,23 +40,28 @@ class QuizController extends Controller
     }
     public function submit(Request $request)
     {
+        // dd('here');
         $answers          = $request->input('answer');
         $totalQuestions   = count($answers);
         $correctAnswers   = 0;
-
+// dd($answers);
         foreach($answers as $questionId=>$selectedOption){
             $question = Question::findOrFail($questionId);
+            // dd($selectedOption);
             if($selectedOption===$question->correct_option){
                 $correctAnswers++;
             }
         }
+        // dd('here');
         $score = ($correctAnswers/$totalQuestions)*100;
 
         $testId = $request->input('test_id');
         if(!$testId){
+            
             return back()->with('error','Test Id is requestred!');
         }
 
+       
         $testResult = new TestResult();
         $testResult->test_id = $testId;
         // $testResult->test_id = $request->input('test');
@@ -64,20 +70,37 @@ class QuizController extends Controller
         $testResult->wrong_answers = $totalQuestions-$correctAnswers;
         $testResult->score=$score;
         $testResult->save();
+        // dd($testResult);?
         return redirect()->route('user.quiz.result',[
-            'score'         =>  $score,
+            // 'score'         =>  $score,
             'testResultId'  =>  $testResult->id
         ]);
     }
-    public function result(Request $request){
-        $score = $request->input('score');
-        $totalQuestions = $request->input('totalQuestions');
-        $correctAnswers = $request->input('correctAnswers');
-        return view('users.quiz.result')
-            ->with(compact('score'))
-            ->with(compact('totalQuestions'))
-            ->with(compact('correctAnswers'));
+
+    public function result(Request $request)
+    {
+        try{
+            $testResultId = $request->route('testResultId');
+            $testResult = TestResult::findOrFail($testResultId);
+            $testName = $testResult->test->name;
+            $totalQuestions = $testResult->total_questions;
+            $correctAnswers = $testResult->correct_answers;
+            $score = $testResult->score;
+            return view('users.quiz.result',compact('testName','totalQuestions','correctAnswers','score'));
+        }catch(\Exception $e){
+            \Log::error('Error fetching test result: ' .$e->getMessage());
+            return back()->with('error','Error fetching test result.please try again later');
+        }
     }
+    // public function result(Request $request){
+    //     $score = $request->input('score');
+    //     $totalQuestions = $request->input('totalQuestions');
+    //     $correctAnswers = $request->input('correctAnswers');
+    //     return view('users.quiz.result')
+    //         ->with(compact('score'))
+    //         ->with(compact('totalQuestions'))
+    //         ->with(compact('correctAnswers'));
+    // }
 
     // public function result($testResultId){
     //     try{
