@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="card">
                 <div class="mt-3">
-                            <a href="{{ url()->previous() }}" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
+                            <a href="{{ route('admin.test.index') }}" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
                         </div>
                     <div class="card-header">Questions</div>
 
