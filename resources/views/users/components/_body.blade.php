@@ -9,8 +9,7 @@
     </div>
 
     <div class="conatiner-fluid content-inner mt-n5 py-0">
-       @include('users.quiz.index')
-       
+        {{ $slot }}
     </div>
 
     @include('users.components._body_footer')

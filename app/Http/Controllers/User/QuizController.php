@@ -16,7 +16,7 @@ class QuizController extends Controller
         // return view('users.quiz.dashboard', ['tests' => $tests]);
         try {
             $tests = Test::where('is_active', true)->get();
-            return view('users.quiz.dashboard', ['tests' => $tests]);
+            return view('users.quiz.index', ['tests' => $tests]);
         } catch (\Exception $e) {
             \Log::error('Error fetching tests: ' . $e->getMessage());
             return back()->with('error', 'Error fetching tests. Please try again later.');

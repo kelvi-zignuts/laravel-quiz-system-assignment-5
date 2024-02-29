@@ -46,8 +46,7 @@ class HomeController extends Controller
         }
         else
         {
-            $assets = ['chart', 'animation'];
-            return view('users.quiz.dashboard', compact('assets'));
+            return redirect()->route('user.quiz.index');
         }
     }
 
