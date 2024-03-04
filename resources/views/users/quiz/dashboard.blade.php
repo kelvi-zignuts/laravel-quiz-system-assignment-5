@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Temlate</title>
+</head>
+<body>
+
 <x-app-layout :assets="$assets ?? []">
    <div class="row">
       <div class="col-md-12 col-lg-12">
@@ -95,7 +106,10 @@
                         <td>{{$result->correct_answers}}</td>
                         <td>{{$result->score}}%</td>
                         <td>
-                           <a href="{{ route('user.quiz.answers', ['test_id' => $result->test->id]) }}" class="btn btn-primary">View</a>
+                           <a href="{{route('user.quiz.answers',['test_id' => $result->test->id])}}" style="margin-right:40px;">
+                              <i class="material-icons" style="font-size:20px;">visibility</i>
+                           </a>
+                           <!-- <a href="{{ route('user.quiz.answers', ['test_id' => $result->test->id]) }}" class="btn btn-primary">View</a> -->
                         </td>
                      </tr>
                      @endforeach
@@ -105,4 +119,11 @@
          </div>
       </div>
    </div>
+   <div class="row justify-content-center">
+      <div class="col-md-6">
+         {{ $userTestResults->links('pagination::bootstrap-5') }} <!-- Pagination links -->
+      </div>
+   </div>
 </x-app-layout>
+</body>
+</html>

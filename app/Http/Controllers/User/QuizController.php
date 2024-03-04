@@ -44,6 +44,9 @@ class QuizController extends Controller
             $testId = $request->input('test');
             $test = Test::findOrFail($testId);
             $questions = Question::where('test_id',$testId)->get();
+            if($questions->isEmpty()){
+                return redirect()->back()->with('error','Questions are not present in this test');
+            }
             $timeLimit = $test->time_limit;
         return view ('users.quiz.start',['questions'=>$questions,'test'=>$test,'timeLimit' => $timeLimit]);
         }

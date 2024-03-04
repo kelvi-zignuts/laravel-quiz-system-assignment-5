@@ -60,7 +60,7 @@ class HomeController extends Controller
                 $userTestResults->whereBetween('created_at',[$start,$end ]);
 
             }
-            $userTestResults = $userTestResults->get();
+            $userTestResults = $userTestResults->paginate(5);
             
            
             // $startDate = $request->input('start_date');
