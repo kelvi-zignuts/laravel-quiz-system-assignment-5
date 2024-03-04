@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Test;
+use App\Models\User;
 
 class TestController extends Controller
 {
     public function index()
     {
         $tests = Test::where('is_active', true)->get();
+        $totalUsers = User::where('user_type','user')->count();
         $testCount = Test::count();
-        return view('admin.test.index', ['tests' => $tests,'testCount'=>$testCount]);
+        return view('admin.test.index', ['tests' => $tests,'testCount'=>$testCount,'totalUsers'=>$totalUsers]);
     }
     public function create()
     {

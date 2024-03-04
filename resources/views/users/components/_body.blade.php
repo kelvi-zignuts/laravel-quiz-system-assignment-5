@@ -14,7 +14,7 @@
 
     @include('users.components._body_footer')
 </main>
-<a class="btn btn-fixed-end btn-warning btn-icon btn-setting" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+<!-- <a class="btn btn-fixed-end btn-warning btn-icon btn-setting" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
     role="button" aria-controls="offcanvasExample">
     <svg width="24" viewBox="0 0 24 24" class="animated-rotate" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -24,7 +24,7 @@
             stroke-linecap="round" stroke-linejoin="round"></circle>
     </svg>
 </a>
-@include('users.components.setting-offcanvas')
+@include('users.components.setting-offcanvas') -->
 @include('users.components._scripts')
 @include('users.components._app_toast')
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

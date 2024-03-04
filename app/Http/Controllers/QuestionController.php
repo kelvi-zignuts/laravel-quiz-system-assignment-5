@@ -23,10 +23,10 @@ class QuestionController extends Controller
     }
     public function store(Request $request, $id)
     {
-        Test::findOrFail($id);
+        // Test::findrFail($id);
 
         $request->validate([
-            'test_id'=>'required',
+            'test_id'=>'required|exists:tests,id',
             'question'=>'required',
             'option_a'=>'required',
             'option_b'=>'required',

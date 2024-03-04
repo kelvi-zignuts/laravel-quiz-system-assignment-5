@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable;
             $table->enum('level',['high','medium','low']);
             $table->tinyInteger('is_active')->default(1);
+            // $table->integer('time_limit')->nullable()->comment('Time limite for the test in minutes');
             $table->timestamps();
         });
     }

@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('admin.test.question.edit');
                 Route::post('/update/{id}', [QuestionController::class, 'update'])->name('admin.test.question.update');
                 Route::post('/destroy/{id}', [QuestionController::class, 'destroy'])->name('admin.test.question.destroy');
+                
             });
         });
     });
@@ -93,6 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('quiz/start', [QuizController::class, 'quizStart'])->name('user.quiz.start');
         Route::post('quiz/submit',[QuizController::class,'submit'])->name('user.quiz.submit');
         Route::get('quiz/result/{testResultId}',[QuizController::class,'result'])->name('user.quiz.result');
+        Route::get('quiz/{test_id}/answers', [QuizController::class, 'viewTestQuestions'])->name('user.quiz.answers');        // Route::get('/quiz/showanswers/{testResultId}',[QuizController::class,'showAnswers'])->name('user.quiz.showanswers');
         // Route::get('/users/quiz/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
         // Route::get('/users/quiz/dashboard',function(){
         //     return view('users.quiz.dashboard');

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Test;
+use App\Models\TestResult;
+use App\Models\User;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -34,20 +37,38 @@ class HomeController extends Controller
         // return view('dashboards.dashboard', compact('assets'));
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        $testCount = Test::count();
+        $assets = ['chart', 'animation'];
+
         if(auth()->user()->user_type == 'admin')
         {
-            $testCount = Test::count();
-            $assets = ['chart', 'animation'];
-            return view('dashboards.dashboard', compact('assets','testCount'));
+            // $testCount = Test::count();
+            $totalUsers = User::where('user_type','user')->count();
+            // $assets = ['chart', 'animation'];
+            return view('dashboards.dashboard', compact('assets','testCount','totalUsers'));
             // $assets = ['chart', 'animation'];
             // return view('dashboards.dashboard', compact('assets'));
         }
         else
         {
-            $assets = ['chart', 'animation'];
-            return view('users.quiz.dashboard', compact('assets'));
+            $userTestResults = TestResult::where('user_id',auth()->id())->latest('created_at');
+            if($request->filled(['start_date','end_date'])){
+                $start = Carbon::parse($request->start_date);
+                $end = Carbon::parse($request->end_date);
+                $userTestResults->whereBetween('created_at',[$start,$end ]);
+
+            }
+            $userTestResults = $userTestResults->get();
+            
+           
+            // $startDate = $request->input('start_date');
+            // $endDate = $request->input('end_date');
+            
+            $averageScore = $userTestResults->avg('score');
+            
+            return view('users.quiz.dashboard', compact('assets','testCount','userTestResults','averageScore'));
         }
     }
 

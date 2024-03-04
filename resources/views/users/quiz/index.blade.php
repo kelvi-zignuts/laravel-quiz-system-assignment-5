@@ -21,12 +21,13 @@
         </div>
         <div class="card-body">
             <div class="row">
+                @if($tests->isNotEmpty())
                 <div class="card-body">
                     <div class="form-group">
                         <form action="{{route('user.quiz.start')}}" method="GET">
                             <label class="form-label">Select test : </label>
                             <select name="test" id="test" class="form-select form-select-sm mb-3 shadow-none">
-                                <option selected="">tests</option>
+                                <!-- <option selected="">tests</option> -->
                                 @foreach($tests as $test)
                                 <option value="{{$test->id}}">{{$test->name}}</option>
                                 @endforeach
@@ -44,6 +45,11 @@
                         </form> -->
                     </div>
                 </div>
+                @else
+                <div class="card-body">
+                    <p>No tests available at the moment.</p>
+                </div>
+                @endif
             </div>
         </div>
     </div>

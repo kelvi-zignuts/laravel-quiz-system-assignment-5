@@ -14,7 +14,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Test </p>
-                              <h4 class="counter" style="visibility: visible;">12</h4>
+                              <h4 class="counter" style="visibility: visible;">{{$testCount}}</h4>
                            </div>
                         </div>
                      </div>
@@ -28,8 +28,11 @@
                               </svg>
                            </div>
                            <div class="progress-detail">
-                              <p  class="mb-2">Total Profit</p>
-                              <h4 class="counter">$185K</h4>
+                              @php
+                                 $averageScore = number_format($userTestResults->avg('score'),2);
+                              @endphp
+                              <p  class="mb-2">Avg. Percentage</p>
+                              <h4 class="counter">{{$averageScore}}%</h4>
                            </div>
                         </div>
                      </div>
@@ -52,6 +55,52 @@
                </ul>
                <div class="swiper-button swiper-button-next"></div>
                <div class="swiper-button swiper-button-prev"></div>
+            </div>
+         </div>
+         <div class="col-md-12 col-lg-12 ">
+            <form method="GET" action="{{ route('dashboard') }}">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="start_date">Start Date</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" value="{{ request('start_date') }}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="end_date">End Date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" value="{{ request('end_date') }}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+         <div class="card">
+            <div class="table-responsive">
+               <table class="table table-striped">
+                  <thead>
+                     <tr>
+                        <th>Test Name</th>
+                        <th>Total Questions</th>
+                        <th>Correct Answers</th>
+                        <th>Score (%)</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     @foreach($userTestResults as $result)
+                     <tr>
+                        <td>{{$result->test->name}}</td>
+                        <td>{{$result->total_questions}}</td>
+                        <td>{{$result->correct_answers}}</td>
+                        <td>{{$result->score}}%</td>
+                        <td>
+                           <a href="{{ route('user.quiz.answers', ['test_id' => $result->test->id]) }}" class="btn btn-primary">View</a>
+                        </td>
+                     </tr>
+                     @endforeach
+                  </tbody>
+               </table>
             </div>
          </div>
       </div>

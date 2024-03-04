@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('test_results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained('tests')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('total_questions');
             $table->integer('correct_answers');
             $table->integer('wrong_answers');

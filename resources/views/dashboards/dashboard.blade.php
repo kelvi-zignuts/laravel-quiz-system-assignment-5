@@ -28,8 +28,8 @@
                               </svg>
                            </div>
                            <div class="progress-detail">
-                              <p  class="mb-2">Total Profit</p>
-                              <h4 class="counter">$185K</h4>
+                              <p  class="mb-2">Total Users</p>
+                              <h4 class="counter">{{$totalUsers}}</h4>
                            </div>
                         </div>
                      </div>
