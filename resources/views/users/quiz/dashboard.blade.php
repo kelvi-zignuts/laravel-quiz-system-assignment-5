@@ -121,7 +121,7 @@
    </div>
    <div class="row justify-content-center">
       <div class="col-md-6">
-         {{ $userTestResults->links('pagination::bootstrap-5') }} <!-- Pagination links -->
+         {{ $userTestResults->links('pagination::bootstrap-5') }}
       </div>
    </div>
 </x-app-layout>

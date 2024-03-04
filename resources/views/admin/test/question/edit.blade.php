@@ -24,7 +24,8 @@
                             <!-- @method('PUT') -->
                             <div class="form-group">
                                 <label for="question">Question</label>
-                                <textarea class="form-control" name="question" id="question" rows="3">{{ $question->question }}</textarea>
+                                <input type="text" class="form-control" name="question" id="question" value="{{ $question->question }}">
+                                <!-- <textarea class="form-control" name="question" id="question" rows="3">{{ $question->question }}</textarea> -->
                             </div>
                             <div class="form-group">
                                 <label for="option_a">Option A</label>

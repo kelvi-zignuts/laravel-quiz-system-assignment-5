@@ -61,6 +61,8 @@ class HomeController extends Controller
 
             }
             $userTestResults = $userTestResults->paginate(5);
+            $userTestResults->appends($request->except('page'));
+            // $userTestResults = $userTestResults->get();
             
            
             // $startDate = $request->input('start_date');

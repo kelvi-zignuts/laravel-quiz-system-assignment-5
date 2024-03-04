@@ -15,7 +15,7 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                         <div class="mt-3">
-                            <a href="{{route('admin.test.question.create',['id'=>$test_id])}}" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
+                            <a href="{{route('admin.test.question.index',['id'=>$test_id])}}" ><i class="fas fa-arrow-circle-left" style="margin-left:10px; font-size:20px;"></i></a>
                         </div>
                     <div class="card-header text-center">Create Question</div>
                     <div class="card-body">
@@ -28,7 +28,7 @@
                             <input type="hidden" name="test_id" id="test_id" value="{{$test_id}}"></input>
                             <div class="form-group">
                                 <label for="question">Question</label>
-                                <textarea class="form-control" name="question" id="question" rows="3"></textarea>
+                                <input class="form-control" name="question" id="question" rows="3">
                             </div>
                             <div class="form-group">
                                 <label for="option_a">Option A</label>

@@ -66,8 +66,7 @@
             </div>
         </div>
     </x-app-layout>
- {{-- <script src="{{ asset('users/components/script.js') }}"></script> --}}
- {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const questions = document.querySelectorAll('.question');
@@ -77,7 +76,18 @@
         let currentQuestionIndex = 0;
 
         // Show the first question
-        questions[currentQuestionIndex].style.display = 'block';
+        if(questions.length>0){
+            questions[currentQuestionIndex].style.display = 'block';
+            if(questions.length === 1){
+                btnNext.style.display = 'none';
+                btnSubmit.style.display = 'block';
+                btnPrev.style.display = 'none';
+            }
+        }
+        else{
+            console.error('no elements');
+            return;
+        }
 
         // Function to show/hide navigation buttons based on current question index
         function toggleButtons() {

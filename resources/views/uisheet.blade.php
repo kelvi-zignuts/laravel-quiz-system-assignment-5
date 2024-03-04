@@ -79,7 +79,7 @@
                                     Landing pages
                                 </a>
                             </li>
-                            <li class="nav-item me-3">
+                            <!-- <li class="nav-item me-3">
                                 <a class="btn btn-primary d-flex align-items-center" aria-current="page"
                                     href="https://templates.iqonic.design/product/hope-ui/pro/laravel/public/dashboards"
                                     target="_blank">
@@ -95,7 +95,7 @@
                                     </svg>
                                     Go Pro
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <a class="btn btn-success" aria-current="page"
                                     href="https://iqonic.design/product/admin-templates/hope-ui-free-open-source-laravel-admin-panel/"
