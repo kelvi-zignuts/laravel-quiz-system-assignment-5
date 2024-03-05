@@ -53,6 +53,10 @@ class HomeController extends Controller
         }
         else
         {
+            $request->validate([
+                'start_date' => 'nullable|date',
+                'end_date' => 'nullable|required_with:start_date|date|after_or_equal:start_date',
+            ]);
             $userTestResults = TestResult::where('user_id',auth()->id())->latest('created_at');
             if($request->filled(['start_date','end_date'])){
                 $start = Carbon::parse($request->start_date);
