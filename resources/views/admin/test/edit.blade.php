@@ -28,13 +28,24 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="level">level : </label>
                                             <input type="text" name='level' id='level' value='{{old("level",$test->level)}}' class='form-control @error("level") is invalid @enderror'>
                                             @error('level')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
-                                        </div>
+                                        </div> -->
+                                        <div class="form-group">
+                                    <label for="level">Level:</label>
+                                    <select name="level" class="form-control">
+                                        <option value="High" {{ old('level', $test->level) === 'High' ? 'selected' : '' }}>
+                                            High</option>
+                                        <option value="Medium"
+                                            {{ old('level', $test->level) === 'Medium' ? 'selected' : '' }}>Medium</option>
+                                        <option value="Low" {{ old('level', $test->level) === 'Low' ? 'selected' : '' }}>
+                                            Low</option>
+                                    </select>
+                                </div>
                                         <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
                             </div>
