@@ -34,6 +34,7 @@ class QuestionController extends Controller
             'option_d'=>'required',
             'correct_option'=>'required|in:a,b,c,d',
         ]);
+        
 
         Question::create($request->all());
 

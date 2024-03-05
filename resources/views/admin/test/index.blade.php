@@ -52,7 +52,7 @@
                         </thead>
 
                     <tbody>
-                        @foreach($tests as $test)
+                    @forelse($tests as $test)
                         <tr>
                             <td>{{$test->name}}</td>
                             <td>{{$test->description}}</td>
@@ -76,7 +76,11 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="7">No data available</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                     </table>
                 </div>

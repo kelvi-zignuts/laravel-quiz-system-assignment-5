@@ -32,19 +32,24 @@
                             <table class="table text-center">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Sr.No</th>
+                                        <!-- <th>ID</th> -->
                                         <th>Question</th>
                                         <th>Options</th>
                                         <th>Correct Option</th>
                                         <th colspan="3" style="text-align:center;">Action</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
-                                    @forelse ($questions as $question)
-                                    <!-- <tr>
-                                        @foreach ($questions as $question)
-                                    <tr> -->
-                                        <td>{{ $question->id }}</td>
+                                    @php
+                                    $serialNumber = 1; // Initialize the serial number
+                                    @endphp
+                                    @if(count($questions) > 0)
+                                    @foreach ($questions as $question)
+                                    <tr>
+                                        <td>{{ $serialNumber++ }}</td>
+                                        <!-- <td>{{ $question->id }}</td> -->
                                         <td>{{ $question->question }}</td>
 
                                         <td>
@@ -78,16 +83,15 @@
                                                 <i class="material-icons" style="font-size:20px;">visibility</i>
                                             </a> -->
                                         </td>
-                                    <!-- </tr>
-                                    @endforeach
-                                    </tr> -->
-                                    @empty
-                                    <tr>
-                                        <td colspan="7">No data available</td>
                                     </tr>
-                                    @endforelse
-
+                                    @endforeach
+                                    @else
+                                    <tr>
+                                        <td colspan="6">No questions available</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
