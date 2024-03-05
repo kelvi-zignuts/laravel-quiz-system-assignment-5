@@ -8,6 +8,8 @@ use App\Models\Test;
 use App\Models\TestResult;
 use App\Models\Question;
 use App\Models\UserResponse;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 // use Carbon\Carbon;
 
 class QuizController extends Controller
@@ -16,20 +18,29 @@ class QuizController extends Controller
     {
         // $tests = Test::where('is_active', true)->get();
         // return view('users.quiz.dashboard', ['tests' => $tests]);
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $userTestResults = TestResult::where('user_id',auth()->id())->whereBetween('created_at',[$startDate,$endDate ])->get();
-        // $userTestResults = TestResult::where('user_id',auth()->id())->get();
-        $averageScore = $userTestResults->avg('score');
-        $testCount = Test::count();
+        // $startDate = $request->input('start_date');
+        // $endDate = $request->input('end_date');
         try {
+            $userTestResults = TestResult::where('user_id', auth()->id())->get();
+            // $attemptedTestIds = $userTestResults->pluck('test_id')->toArray();
+            // $attemptedTestIds = TestResult::where('user_id', auth()->id())->pluck('test_id')->toArray();
             $tests = Test::where('is_active', true)->get();
-            return view('users.quiz.index', ['tests' => $tests,'testCount'=>$testCount,'userTestResults'=>$userTestResults,'averageScore'=>$averageScore]);
+    
+            $testCount = Test::count();
+            $averageScore = $userTestResults->avg('score');
+    
+            return view('users.quiz.index', [
+                'tests' => $tests,
+                'testCount' => $testCount,
+                'userTestResults' => $userTestResults,
+                'averageScore' => $averageScore,
+            ]);
         } catch (\Exception $e) {
             \Log::error('Error fetching tests: ' . $e->getMessage());
-            return back()->with('error', 'Error fetching tests. Please try again later.');
+            return back()->with('error', 'Error fetching tests. Please check the logs for details.');
         }
     }
+
    
     public function quizStart(Request $request)
     {
@@ -43,6 +54,12 @@ class QuizController extends Controller
         try{
             $testId = $request->input('test');
             $test = Test::findOrFail($testId);
+            
+            $userTestResults = TestResult::where('user_id', auth()->id())->where('test_id',$testId);
+            if ($userTestResults->exists()) {
+                // dd($userTestResults);
+                return redirect()->back()->with('error', 'You have already attempted this test.');
+            }
             $questions = Question::where('test_id',$testId)->get();
             if($questions->isEmpty()){
                 return redirect()->back()->with('error','Questions are not present in this test');

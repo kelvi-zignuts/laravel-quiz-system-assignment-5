@@ -82,6 +82,7 @@
                     <div class="col-md-4 mb-3">
                         <label>&nbsp;</label>
                         <button type="submit" class="btn btn-primary">Apply Filters</button>
+                        <a href="{{ route('dashboard') }}" class="btn btn-secondary">Clear Filters</a>
                     </div>
                 </div>
             </form>
