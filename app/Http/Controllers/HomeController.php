@@ -13,28 +13,17 @@ class HomeController extends Controller
     /*
      * Dashboard Pages Routs
      */
-    // public function index(Request $request)
-    // {
-    //     $assets = ['chart', 'animation'];
-    //     return view('dashboards.dashboard', compact('assets'));
-    // }
-
     public function index()
     {
         // dd('index');
         if(auth()->user()->user_type == 'admin')
         {
             return redirect('login');
-        //     $testCount = Test::count();
-        //     $assets = ['chart', 'animation'];
-        // return view('dashboards.dashboard', compact('assets','testCount'));
         }
         else
         {
             return redirect('user.quiz.index');
         }
-        // $assets = ['chart', 'animation'];
-        // return view('dashboards.dashboard', compact('assets'));
     }
 
     public function dashboard(Request $request)
@@ -44,15 +33,14 @@ class HomeController extends Controller
 
         if(auth()->user()->user_type == 'admin')
         {
-            // $testCount = Test::count();
             $totalUsers = User::where('user_type','user')->count();
-            // $assets = ['chart', 'animation'];
             return view('dashboards.dashboard', compact('assets','testCount','totalUsers'));
             // $assets = ['chart', 'animation'];
             // return view('dashboards.dashboard', compact('assets'));
         }
         else
         {
+            //filter validation
             $request->validate([
                 'start_date' => 'nullable|date',
                 'end_date' => 'nullable|required_with:start_date|date|after_or_equal:start_date',
@@ -64,14 +52,8 @@ class HomeController extends Controller
                 $userTestResults->whereBetween('created_at',[$start,$end ]);
 
             }
-            $userTestResults = $userTestResults->paginate(5);
-            $userTestResults->appends($request->except('page'));
-            // $userTestResults = $userTestResults->get();
-            
-           
-            // $startDate = $request->input('start_date');
-            // $endDate = $request->input('end_date');
-            
+            $userTestResults = $userTestResults->paginate(5); //show userresult with paginations
+            $userTestResults->appends($request->except('page')); //using append method bcz i used pagination with filter
             $averageScore = $userTestResults->avg('score');
             
             return view('users.quiz.dashboard', compact('assets','testCount','userTestResults','averageScore'));

@@ -14,26 +14,20 @@ use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
 {
+    //show all dashboard files data 
     public function index(Request $request)
     {
-        // $tests = Test::where('is_active', true)->get();
-        // return view('users.quiz.dashboard', ['tests' => $tests]);
-        // $startDate = $request->input('start_date');
-        // $endDate = $request->input('end_date');
         try {
             $userTestResults = TestResult::where('user_id', auth()->id())->get();
-            // $attemptedTestIds = $userTestResults->pluck('test_id')->toArray();
-            // $attemptedTestIds = TestResult::where('user_id', auth()->id())->pluck('test_id')->toArray();
             $tests = Test::where('is_active', true)->get();
-    
             $testCount = Test::count();
             $averageScore = $userTestResults->avg('score');
     
             return view('users.quiz.index', [
-                'tests' => $tests,
-                'testCount' => $testCount,
-                'userTestResults' => $userTestResults,
-                'averageScore' => $averageScore,
+                'tests'             => $tests,
+                'testCount'         => $testCount,
+                'userTestResults'   => $userTestResults,
+                'averageScore'      => $averageScore,
             ]);
         } catch (\Exception $e) {
             \Log::error('Error fetching tests: ' . $e->getMessage());
@@ -41,7 +35,7 @@ class QuizController extends Controller
         }
     }
 
-   
+   //select test and start the quiz
     public function quizStart(Request $request)
     {
         // quiz start
@@ -57,7 +51,6 @@ class QuizController extends Controller
             
             $userTestResults = TestResult::where('user_id', auth()->id())->where('test_id',$testId);
             if ($userTestResults->exists()) {
-                // dd($userTestResults);
                 return redirect()->back()->with('error', 'You have already attempted this test.');
             }
             $questions = Question::where('test_id',$testId)->get();
@@ -74,71 +67,68 @@ class QuizController extends Controller
         
 
     }
+
+    //when complete the quiz then  calculate scores, correct answers, incorrect answers, testname
     public function submit(Request $request)
-{
-    $answers = $request->input('answer');
-    $testId = $request->input('test_id');
+    {
+        $answers = $request->input('answer');
+        $testId = $request->input('test_id');
 
-    // Fetch all questions for the test
-    $questions = Question::where('test_id', $testId)->get();
+        // Fetch all questions
+        $questions = Question::where('test_id', $testId)->get();
 
-    // Initialize variables for score calculation
-    $totalQuestions = count($questions);
-    $correctAnswers = 0;
-     
-    // $startTime = now()->timestamp; // Get the current timestamp as start time
-    // $endTime = now()->timestamp;
-    // $timeTaken = $endTime - $startTime;
+        //score calculation
+        $totalQuestions = count($questions);
+        $correctAnswers = 0;
 
-    // Iterate through each question and store user responses
-    foreach ($questions as $question) {
-        $selectedOption = isset($answers[$question->id]) ? $answers[$question->id] : null;
-        $isCorrect = $selectedOption === $question->correct_option;
+        // Iterate through each question and store user responses
+        foreach ($questions as $question) {
+            $selectedOption = isset($answers[$question->id]) ? $answers[$question->id] : null;
+            $isCorrect = $selectedOption === $question->correct_option;
 
-        // Store user response in the UserResponse table
-        UserResponse::create([
-            'user_id' => auth()->user()->id,
-            'test_id' => $testId,
-            'question_id' => $question->id,
-            'selected_option' => $selectedOption,
-            'is_correct' => $isCorrect,
-            // 'time_taken' => $timeTaken ?? 0
-        ]);
+            // Store user response in the UserResponse table
+            UserResponse::create([
+                'user_id'             => auth()->user()->id,
+                'test_id'             => $testId,
+                'question_id'         => $question->id,
+                'selected_option'     => $selectedOption,
+                'is_correct'          => $isCorrect,
+            ]);
 
-        // Update correctAnswers count
-        if ($isCorrect) {
-            $correctAnswers++;
+            // Update correctAnswers count
+            if ($isCorrect) {
+                $correctAnswers++;
+            }
         }
+
+        // Calculate the score
+        $score = ($correctAnswers / $totalQuestions) * 100;
+
+        // Save the test result
+
+        $testResult = new TestResult();
+        $testResult->test_id = $testId;
+        $testResult->user_id = auth()->user()->id;
+        $testResult->total_questions = $totalQuestions;
+        $testResult->correct_answers = $correctAnswers;
+        $testResult->wrong_answers = $totalQuestions - $correctAnswers;
+        $testResult->score = $score;
+        $testResult->save();
+
+        // Redirect to the result page
+        return redirect()->route('user.quiz.result', ['testResultId' => $testResult->id]);
     }
 
-    // Calculate the score
-    $score = ($correctAnswers / $totalQuestions) * 100;
-
-    // Save the test result
-    $testResult = new TestResult();
-    $testResult->test_id = $testId;
-    $testResult->user_id = auth()->user()->id;
-    $testResult->total_questions = $totalQuestions;
-    $testResult->correct_answers = $correctAnswers;
-    $testResult->wrong_answers = $totalQuestions - $correctAnswers;
-    $testResult->score = $score;
-    // $testResult->time_taken = $timeTaken;
-    $testResult->save();
-
-    // $request->session()->forget('quiz_start_time');
-    // Redirect to the result page
-    return redirect()->route('user.quiz.result', ['testResultId' => $testResult->id]);
-}
-
+    //show result page (testname, totalquestions,correctanswers,score)
     public function result(Request $request)
     {
         try{
-            $testResultId = $request->route('testResultId');
-            $testResult = TestResult::findOrFail($testResultId);
-            $testName = $testResult->test->name;
-            $totalQuestions = $testResult->total_questions;
-            $correctAnswers = $testResult->correct_answers;
-            $score = $testResult->score;
+            $testResultId       = $request->route('testResultId');
+            $testResult         = TestResult::findOrFail($testResultId);
+            $testName           = $testResult->test->name;
+            $totalQuestions     = $testResult->total_questions;
+            $correctAnswers     = $testResult->correct_answers;
+            $score              = $testResult->score;
             return view('users.quiz.result',compact('testName','totalQuestions','correctAnswers','score','testResult'));
         }catch(\Exception $e){
             \Log::error('Error fetching test result: ' .$e->getMessage());
@@ -146,27 +136,20 @@ class QuizController extends Controller
         }
     }
 
+    //already given test then show correct answers with user selected answer
     public function viewTestQuestions($test_id)
-{
-    try {
-        $test = Test::findOrFail($test_id);
-        $questions = Question::where('test_id', $test_id)->get();
-        $userResponses = UserResponse::where('test_id', $test_id)
-            ->where('user_id', auth()->user()->id)
-            ->get();
-        return view('users.quiz.answers', compact('test', 'questions', 'userResponses'));
-    } catch (\Exception $e) {
-        \Log::error('Error fetching test questions: ' . $e->getMessage());
-        return back()->with('error', 'Error fetching test questions. Please try again later.');
+    {
+        try {
+            $test = Test::findOrFail($test_id);
+            $questions = Question::where('test_id', $test_id)->get();
+            $userResponses = UserResponse::where('test_id', $test_id)
+                ->where('user_id', auth()->user()->id)
+                ->get();
+            return view('users.quiz.answers', compact('test', 'questions', 'userResponses'));
+        } catch (\Exception $e) {
+            \Log::error('Error fetching test questions: ' . $e->getMessage());
+            return back()->with('error', 'Error fetching test questions. Please try again later.');
+        }
     }
-    // try {
-    //     $test = Test::findOrFail($test_id);
-    //     $questions = Question::where('test_id', $test_id)->get();
-    //     return view('users.quiz.answers', compact('test', 'questions'));
-    // } catch (\Exception $e) {
-    //     \Log::error('Error fetching test questions: ' . $e->getMessage());
-    //     return back()->with('error', 'Error fetching test questions. Please try again later.');
-    // }
-}
-    
+        
 }

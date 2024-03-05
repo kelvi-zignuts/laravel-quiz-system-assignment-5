@@ -7,10 +7,10 @@
     <title>Start Exam</title>
 
     <style>
-        .button-container {
-    display: flex;
-    justify-content: space-between;
-}
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+    }
     </style>
 </head>
 
@@ -30,12 +30,14 @@
                             <div class="row">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <form  id="quiz-form" action="{{ route('user.quiz.submit') }}" method="POST">
+                                        <form id="quiz-form" action="{{ route('user.quiz.submit') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="test_id" value="{{ $test->id }}">
+                                            <!-- show questions in quiz with all options -->
                                             <div class="question-container">
                                                 @foreach($questions as $key => $question)
-                                                <div class="question" style="display: {{ $key === 0 ? 'block' : 'none' }}">
+                                                <div class="question"
+                                                    style="display: {{ $key === 0 ? 'block' : 'none' }}">
                                                     <p>{{ $question->question }}</p>
                                                     <input type="radio" name="answer[{{ $question->id }}]" value="a">
                                                     {{ $question->option_a }}<br>
@@ -48,7 +50,9 @@
                                                 </div>
                                                 @endforeach
                                             </div>
+                                            <!-- manually add timer in quiz -->
                                             <div id="timer">Time Left: 2:00</div>
+                                            <!-- next previous button -->
                                             <div class="button-container d-flex justify-content-between">
                                                 <button type="button" class="btn btn-primary btn-prev"
                                                     style="display: none;">Previous</button>
@@ -67,8 +71,9 @@
         </div>
     </x-app-layout>
 
+    <!-- next, previous, submit buttons and timmer related script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const questions = document.querySelectorAll('.question');
         const btnPrev = document.querySelector('.btn-prev');
         const btnNext = document.querySelector('.btn-next');
@@ -76,15 +81,14 @@
         let currentQuestionIndex = 0;
 
         // Show the first question
-        if(questions.length>0){
+        if (questions.length > 0) {
             questions[currentQuestionIndex].style.display = 'block';
-            if(questions.length === 1){
+            if (questions.length === 1) {
                 btnNext.style.display = 'none';
                 btnSubmit.style.display = 'block';
                 btnPrev.style.display = 'none';
             }
-        }
-        else{
+        } else {
             console.error('no elements');
             return;
         }
@@ -107,7 +111,7 @@
         }
 
         // Event listener for next button
-        btnNext.addEventListener('click', function () {
+        btnNext.addEventListener('click', function() {
             questions[currentQuestionIndex].style.display = 'none';
             currentQuestionIndex++;
             questions[currentQuestionIndex].style.display = 'block';
@@ -115,7 +119,7 @@
         });
 
         // Event listener for previous button
-        btnPrev.addEventListener('click', function () {
+        btnPrev.addEventListener('click', function() {
             questions[currentQuestionIndex].style.display = 'none';
             currentQuestionIndex--;
             questions[currentQuestionIndex].style.display = 'block';
@@ -144,17 +148,15 @@
 
         updateTimer(); // Start the timer
     });
-    document.getElementById('quiz-form').addEventListener('submit', function (event) {
-            // Check if all questions have been answered
-            const questions = document.querySelectorAll('.question');
-            const answers = document.querySelectorAll('input[type="radio"]:checked');
-            if (answers.length < questions.length) {
-                // If not all questions are answered, prompt the user to complete them
-                alert('Please answer all questions before submitting.');
-                event.preventDefault(); // Prevent form submission
-            }
-        });
-</script>
+    document.getElementById('quiz-form').addEventListener('submit', function(event) {
+        const questions = document.querySelectorAll('.question');
+        const answers = document.querySelectorAll('input[type="radio"]:checked');
+        if (answers.length < questions.length) {
+            alert('Please answer all questions before submitting.');
+            event.preventDefault(); 
+        }
+    });
+    </script>
 
 </body>
 

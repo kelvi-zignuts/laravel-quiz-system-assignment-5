@@ -66,7 +66,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
 
+    //admin side routes
     Route::prefix('admin')->group(function () {
+
+        //tests section related routes
         Route::prefix('test')->group(function () {
             Route::get('/', [TestController::class, 'index'])->name('admin.test.index');
             Route::get('/create', [TestController::class, 'create'])->name('admin.test.create');
@@ -77,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('/count',[TestController::class,'getTestCount'])->name('admin.test.count');
 
+            //questions section related routes
             Route::prefix('question')->group(function () {
                 Route::get('/{id}', [QuestionController::class, 'index'])->name('admin.test.question.index');
                 Route::get('/create/{id}', [QuestionController::class, 'create'])->name('admin.test.question.create');
@@ -89,21 +93,18 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+    //users side routes
     Route::prefix('user')->group(function () {
         Route::get('quiz', [QuizController::class, 'index'])->name('user.quiz.index');
         Route::get('quiz/start', [QuizController::class, 'quizStart'])->name('user.quiz.start');
         Route::post('quiz/submit',[QuizController::class,'submit'])->name('user.quiz.submit');
         Route::get('quiz/result/{testResultId}',[QuizController::class,'result'])->name('user.quiz.result');
-        Route::get('quiz/{test_id}/answers', [QuizController::class, 'viewTestQuestions'])->name('user.quiz.answers');        // Route::get('/quiz/showanswers/{testResultId}',[QuizController::class,'showAnswers'])->name('user.quiz.showanswers');
-        // Route::get('/users/quiz/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-        // Route::get('/users/quiz/dashboard',function(){
-        //     return view('users.quiz.dashboard');
-        // })->name('dashboard');
+        Route::get('quiz/{test_id}/answers', [QuizController::class, 'viewTestQuestions'])->name('user.quiz.answers'); 
     });
 
 
-    Route::get('/user-tests', [userTestController::class, 'index'])->name('user.tests.index');
-    Route::get('/user-tests/{id}', [userTestController::class, 'startExam'])->name('user.tests.startExam');
+    // Route::get('/user-tests', [userTestController::class, 'index'])->name('user.tests.index');
+    // Route::get('/user-tests/{id}', [userTestController::class, 'startExam'])->name('user.tests.startExam');
 });
 
 

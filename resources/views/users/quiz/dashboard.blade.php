@@ -23,6 +23,7 @@
                                  <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
                               </svg>
                            </div>
+                           <!-- total test count -->
                            <div class="progress-detail">
                               <p  class="mb-2">Total Test </p>
                               <h4 class="counter" style="visibility: visible;">{{$testCount}}</h4>
@@ -38,6 +39,7 @@
                                  <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
                               </svg>
                            </div>
+                           <!-- average percentage count -->
                            <div class="progress-detail">
                               @php
                                  $averageScore = number_format($userTestResults->avg('score'),2);
@@ -68,6 +70,7 @@
                <div class="swiper-button swiper-button-prev"></div>
             </div>
          </div>
+         <!-- startDate and endDate filter -->
          <div class="col-md-12 col-lg-12 ">
             <form method="GET" action="{{ route('dashboard') }}">
                 <div class="form-row">
@@ -87,6 +90,7 @@
                 </div>
             </form>
         </div>
+        <!-- score wise list for each test -->
          <div class="card">
             <div class="table-responsive">
                <table class="table table-striped">
@@ -110,7 +114,6 @@
                            <a href="{{route('user.quiz.answers',['test_id' => $result->test->id])}}" style="margin-right:40px;">
                               <i class="material-icons" style="font-size:20px;">visibility</i>
                            </a>
-                           <!-- <a href="{{ route('user.quiz.answers', ['test_id' => $result->test->id]) }}" class="btn btn-primary">View</a> -->
                         </td>
                      </tr>
                      @endforeach
@@ -120,6 +123,7 @@
          </div>
       </div>
    </div>
+   <!-- pagination code -->
    <div class="row justify-content-center">
       <div class="col-md-6">
          {{ $userTestResults->links('pagination::bootstrap-5') }}

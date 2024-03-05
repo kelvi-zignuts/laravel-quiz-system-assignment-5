@@ -19,10 +19,7 @@
                         </div>
                     <div class="card-header text-center">Create Question</div>
                     <div class="card-body">
-                        <!-- @if(session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif -->
-
+                        <!-- create questions and answers -->
                         <form action="{{ route('admin.test.question.store', ['id' => $test_id]) }}" method="POST">
                             @csrf
                             <input type="hidden" name="test_id" id="test_id" value="{{$test_id}}"></input>
@@ -49,7 +46,7 @@
                                 <label for="option_d">Option D</label>
                                 <input type="text" class="form-control" name="option_d" id="option_d">
                             </div>
-                            <!-- Repeat similar form groups for options b, c, and d -->
+                            <!-- choose correct option -->
                             <div class="form-group">
                                 <label for="correct_option">Correct Option</label>
                                 <select class="form-control" name="correct_option" id="correct_option">

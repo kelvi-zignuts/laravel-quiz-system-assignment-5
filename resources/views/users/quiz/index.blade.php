@@ -28,30 +28,22 @@
                                 @if($tests->isNotEmpty())
                                 <div class="card-body">
                                     <div class="form-group">
+                                        <!-- select test for quiz -->
                                         <form action="{{route('user.quiz.start')}}" method="GET">
                                             <label class="form-label">Select test : </label>
                                             <select name="test" id="test"
                                                 class="form-select form-select-sm mb-3 shadow-none">
-                                                <!-- <option selected="">tests</option> -->
                                                 @foreach($tests as $test)
                                                 <option value="{{ $test->id }}">
-                                                        {{ $test->name }}
-                                                    </option>
-                                               
-                                                <!-- <option value="{{$test->id}}">{{$test->name}}</option> -->
+                                                    {{ $test->name }}
+                                                </option>
+
                                                 @endforeach
                                             </select>
 
                                             <button type="submit" class="btn btn-primary">Start Exam</button>
 
                                         </form>
-                                        <!-- <form method="POST" action="{{route('logout')}}">
-                            @csrf
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="event.preventDefault();
-                            this.closest('form').submit();">
-                                {{ __('Log out') }}
-                            </a>
-                        </form> -->
                                     </div>
                                 </div>
                                 @else

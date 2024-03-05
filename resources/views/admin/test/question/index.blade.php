@@ -33,7 +33,6 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No</th>
-                                        <!-- <th>ID</th> -->
                                         <th>Question</th>
                                         <th>Options</th>
                                         <th>Correct Option</th>
@@ -42,14 +41,15 @@
                                 </thead>
 
                                 <tbody>
+                                    <!-- serial number php code -->
                                     @php
-                                    $serialNumber = 1; // Initialize the serial number
+                                    $serialNumber = 1;
                                     @endphp
+                                    <!-- if data not avaible then show proper message -->
                                     @if(count($questions) > 0)
                                     @foreach ($questions as $question)
                                     <tr>
                                         <td>{{ $serialNumber++ }}</td>
-                                        <!-- <td>{{ $question->id }}</td> -->
                                         <td>{{ $question->question }}</td>
 
                                         <td>
@@ -62,8 +62,8 @@
 
                                         </td>
                                         <td style="vertical-align:top;">{{strtoupper($question->correct_option)}}</td>
-                                        <!-- <td>{{ $question->correct_option }}</td> -->
-
+                                        
+                                        <!-- edit,delete,view-->
                                         <td class="text-center">
                                             <a href="{{route('admin.test.question.edit',['id'=>$question->id])}}"
                                                 style="margin-left:30px;">
@@ -73,15 +73,11 @@
                                                 action="{{route('admin.test.question.destroy',['id'=>$question->id])}}"
                                                 method='POST' style="display:inline; margin-left:60px; ">
                                                 @csrf
-                                                <!-- @method('DELETE') -->
                                                 <button type="submit" class="btn" style="color:red;"
                                                     onclick="return confirm('are you sure you want to delete this test?')">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>
-                                            <!-- <a href="#" style="margin-right:40px;">
-                                                <i class="material-icons" style="font-size:20px;">visibility</i>
-                                            </a> -->
                                         </td>
                                     </tr>
                                     @endforeach

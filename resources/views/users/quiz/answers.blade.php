@@ -25,27 +25,29 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <table class="table">
-
-                                           @foreach($questions as $key => $question)
-                                                <p>{{ $key + 1 }} . {{ $question->question }}</p>
-                                                <div style="display:inline-block;vertical-align:top;">
-                                                    <span class="option_label">(A)</span> {{ $question->option_a }}<br>
-                                                    <span class="option_label">(B)</span> {{ $question->option_b }}<br>
-                                                    <span class="option_label">(C)</span> {{ $question->option_c }}<br>
-                                                    <span class="option_label">(D)</span> {{ $question->option_d }}<br>
-                                                </div>
-                                                <p >Correct Option: {{ $question->correct_option }}</p>
-                                                @php
-                                                $userResponse = $userResponses->where('question_id', $question->id)->first();
+                                        <!-- show correct answer and user selected answer  -->
+                                            @foreach($questions as $key => $question)
+                                            <p>{{ $key + 1 }} . {{ $question->question }}</p>
+                                            <div style="display:inline-block;vertical-align:top;">
+                                                <span class="option_label">(A)</span> {{ $question->option_a }}<br>
+                                                <span class="option_label">(B)</span> {{ $question->option_b }}<br>
+                                                <span class="option_label">(C)</span> {{ $question->option_c }}<br>
+                                                <span class="option_label">(D)</span> {{ $question->option_d }}<br>
+                                            </div>
+                                            <p>Correct Option: {{ $question->correct_option }}</p>
+                                            @php
+                                            $userResponse = $userResponses->where('question_id',
+                                            $question->id)->first();
                                             @endphp
 
                                             @if($userResponse)
-                                                <p>User Selected Option: {{ $userResponse->selected_option }}</p>
-                                                <p>Is Correct: {{ $userResponse->is_correct ? 'Yes' : 'No' }}</p>
+                                            <p>User Selected Option: {{ $userResponse->selected_option }}</p>
+                                            <p>Is Correct: {{ $userResponse->is_correct ? 'Yes' : 'No' }}</p>
                                             @else
-                                                <p>User did not answer this question.</p>
+                                            <p>User did not answer this question.</p>
                                             @endif
-                                                <hr style="border-top: 1px solid #000; margin-top: 10px; margin-bottom: 10px;"> 
+                                            <hr
+                                                style="border-top: 1px solid #000; margin-top: 10px; margin-bottom: 10px;">
                                             @endforeach
 
                                     </div>
