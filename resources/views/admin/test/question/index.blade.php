@@ -41,9 +41,9 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($questions as $question)
-                                    <tr>
+                                    <!-- <tr>
                                         @foreach ($questions as $question)
-                                    <tr>
+                                    <tr> -->
                                         <td>{{ $question->id }}</td>
                                         <td>{{ $question->question }}</td>
 
@@ -78,9 +78,9 @@
                                                 <i class="material-icons" style="font-size:20px;">visibility</i>
                                             </a> -->
                                         </td>
-                                    </tr>
+                                    <!-- </tr>
                                     @endforeach
-                                    </tr>
+                                    </tr> -->
                                     @empty
                                     <tr>
                                         <td colspan="7">No data available</td>
